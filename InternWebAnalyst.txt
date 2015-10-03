@@ -62,3 +62,57 @@ function extractDatalayer(urlGiven) {
     
     return datalayer;
 }
+
+Q5. Write a JavaScript function which takes 'datalayer' object from task 4 and convert them in image tag as demonstrated below and append as child to 'body' tag.
+
+Example: <img src="https://example.com/datacollector?pia.ca=72208039&pie.de=cbartens@datalicious.com&pin.gn=Christian&pin.fn=Bartens">
+
+
+A5. 
+
+function datalayerToImgSrc(datalayer, baseUrl) {
+    // This function takes a datalayer object and converts them into a html image tag before appending them 
+    // as child to the the body tag of the document
+    // input 'datalayer: datalayer object
+    // input 'baseUrl': string with the base url for the image queries to be attached.
+    // return: false
+    
+    var imgString = baseUrl + "?"; 
+    
+    for (var key in datalayer) {
+        imgString = imgString + key + "=" + datalayer[key] + "&";
+    }
+    
+    imgString = imgString.substring(0, imgString.length -1);
+    
+    var imgSrc = document.createElement('img');
+    imgSrc.src = imgString;
+    document.body.appendChild(imgSrc);
+	
+	return false;
+}
+
+Q6. Write a JavaScript function to store and retrieve the 'datalayer' object from task-4 HTML5 storage.
+
+function datalayerToAndFromStorage(datalayer) {
+    // This function is to demonstrate sending an object to storage and retrieving it.
+    // input 'datalayer': The datalayer object from the previous tasks
+    // return: datalayer object if storage is possible, else false
+    
+    // To prevent breakage
+    if(typeof(Storage) !== "undefined") {
+        // Send datalayer to HTML5 Local Storage
+        localStorage.setItem('datalayer object', datalayer);
+        
+        //Retrieving the datalayer
+        var retrievedDatalayer = localStorage.getItem('datalayer object');
+    
+    } else {
+        console.log(" No HTML5 Storage support.");
+        return false;
+    }
+    
+    return retrievedDatalayer;
+}
+
+

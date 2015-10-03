@@ -19,4 +19,48 @@ function extractDatalayer(urlGiven) {
 }
 
 var dataLayer = extractDatalayer(dataliciousUrl);
-console.log(dataLayer);
+
+function datalayerToImgSrc(datalayer, baseUrl) {
+    // This function takes a datalayer object and converts them into a html image tag before appending them 
+    // as child to the the body tag of the document
+    // input 'datalayer: datalayer object
+    // input 'baseUrl': string with the base url for the image queries to be attached.
+    // return: false
+    
+    var imgString = baseUrl + "?"; 
+    
+    for (var key in datalayer) {
+        imgString = imgString + key + "=" + datalayer[key] + "&";
+    }
+    
+    imgString = imgString.substring(0, imgString.length -1);
+    
+    var imgSrc = document.createElement('img');
+    imgSrc.src = imgString;
+    document.body.appendChild(imgSrc);
+	
+    return false;
+}
+
+var baseImgUrl = "https://example.com/datacollector";
+
+function datalayerToAndFromStorage(datalayer) {
+    // This function is to demonstrate sending an object to storage and retrieving it.
+    // input 'datalayer': The datalayer object from the previous tasks
+    // return: datalayer object if storage is possible, else false
+    
+    // To prevent breakage
+    if(typeof(Storage) !== "undefined") {
+        // Send datalayer to HTML5 Local Storage
+        localStorage.setItem('datalayer object', datalayer);
+        
+        //Retrieving the datalayer
+        var retrievedDatalayer = localStorage.getItem('datalayer object');
+    
+    } else {
+        console.log(" No HTML5 Storage support.");
+        return false;
+    }
+    
+    return retrievedDatalayer;
+}
