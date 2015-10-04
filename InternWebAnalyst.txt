@@ -12,7 +12,7 @@ Q2. Write a sum function which will work properly when invoked using syntax belo
 console.log(sum(2,3)); // Outputs 5 
 A2.
 function sum(x, y) {
-    return x + y
+    return x + y;
 }
 
 Q3. Consider you have code snippet like this:
@@ -108,11 +108,13 @@ function datalayerToAndFromStorage(datalayer) {
         var retrievedDatalayer = localStorage.getItem('datalayer object');
     
     } else {
-        console.log(" No HTML5 Storage support.");
+        console.log("No HTML5 Storage support.");
         return false;
     }
     
     return retrievedDatalayer;
 }
 
+Q7. Can you write down any native JavaScript functions that work in Chrome/Firefox and don't work in Internet Explorer or visa-versa?
 
+I can't think of any functions that don't work in one and not the other, however there is a history of incompatibility and older versions of internet explorer not conforming to javascript and html standards. When preparing a product it is important to test across as many different platforms as possible. 
